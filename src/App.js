@@ -25,12 +25,28 @@ function App() {
         <div>
             <h1>My Hacker Stories</h1>
 
-            <label htmlFor="search">Search: </label>
-            <input id="search" type="text" />
+            <Search />
 
             <hr />
 
-            <ul>
+            <List />
+
+        </div>
+    );
+}
+
+function Search() {
+    return (
+        <>
+            <label htmlFor="search">Search: </label>
+            <input id="search" type="text" />
+        </>
+    );
+}
+
+function List() {
+    return (
+        <ul>
             {list.map((item) => {
                 return (
                     <li key={item.objectID}>
@@ -45,9 +61,7 @@ function App() {
                     </li>
                 );
             })}
-            </ul>
-
-        </div>
+        </ul>
     );
 }
 
