@@ -21,7 +21,7 @@ const App = () => {
         }
     ];
 
-    const [searchTerm, setSearchTerm] = React.useState('');
+    const [searchTerm, setSearchTerm] = React.useState('React');
 
     const handleSearch = (e) => {
         setSearchTerm(e.target.value);
@@ -48,7 +48,7 @@ const Search = (props) => {
     return (
         <div>
             <label htmlFor="search" placeholder="Search">Search: </label>
-            <input id="search" type="text" onChange={props.onSearch} />
+            <input id="search" type="text" onChange={props.onSearch} value={props.term} />
 
             <p>
                 Search for: <strong>{props.term}</strong>
