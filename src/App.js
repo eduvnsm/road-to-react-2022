@@ -65,20 +65,26 @@ const List = ({ list }) => {
     );
 }
 
-const Item = ({ item }) => {
-
-    return (
-        <li key={item.objectID} style={{paddingTop: '1em'}}>
+const Item = ({
+        item: {
+            title,
+            url,
+            author,
+            num_comments,
+            points,
+            objectID
+        }
+    }) => (
+        <li key={objectID} style={{paddingTop: '1em'}}>
             <span>
-                <a href={item.url}>
-                    {item.title}
+                <a href={url}>
+                    {title}
                 </a>
             </span><br />
-            <span>{item.author}</span><br />
-            <span>{item.num_comments}</span><br />
-            <span>{item.points}</span>
+            <span>{author}</span><br />
+            <span>{num_comments}</span><br />
+            <span>{points}</span>
         </li>
-    );
-}
+);
 
 export default App;
