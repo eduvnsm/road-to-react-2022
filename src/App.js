@@ -43,44 +43,41 @@ const App = () => {
     );
 }
 
-const Search = (props) => {
+const Search = ({ term, onSearch }) => (
+    <div>
+        <label htmlFor="search" placeholder="Search">Search: </label>
+        <input id="search" type="text" onChange={onSearch} value={term} />
 
-    return (
-        <div>
-            <label htmlFor="search" placeholder="Search">Search: </label>
-            <input id="search" type="text" onChange={props.onSearch} value={props.term} />
+        <p>
+            Search for: <strong>{term}</strong>
+        </p>
+    </div>
+);
 
-            <p>
-                Search for: <strong>{props.term}</strong>
-            </p>
-        </div>
-    );
-}
-
-const Item = (props) => {
-
-    return (
-        <li key={props.item.objectID} style={{paddingTop: '1em'}}>
-            <span>
-                <a href={props.item.url}>
-                    {props.item.title}
-                </a>
-            </span><br />
-            <span>{props.item.author}</span><br />
-            <span>{props.item.num_comments}</span><br />
-            <span>{props.item.points}</span>
-        </li>
-    );
-}
-
-const List = (props) => {
+const List = ({ list }) => {
 
     return (
         <ul>
-            {props.list.map((item) => (
+            {list.map((item) => (
                 <Item key={item.objectID} item={item} />
             ))}
         </ul>
+    );
+}
+
+const Item = ({ item }) => {
+
+    return (
+        <li key={item.objectID} style={{paddingTop: '1em'}}>
+            <span>
+                <a href={item.url}>
+                    {item.title}
+                </a>
+            </span><br />
+            <span>{item.author}</span><br />
+            <span>{item.num_comments}</span><br />
+            <span>{item.points}</span>
+        </li>
     );
 }
 
