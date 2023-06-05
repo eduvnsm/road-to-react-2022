@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const list = [
+const stories = [
     {
         title: 'React',
         url: 'https://reactjs.org/',
@@ -29,7 +29,7 @@ const App = () => {
 
             <hr />
 
-            <List />
+            <List list={stories} />
 
         </div>
     );
@@ -50,22 +50,24 @@ const Search = () => {
     )
 }
 
-const List = () => (
+const Item = (props) => (
+    <li key={props.item.objectID} style={{paddingTop: '1em'}}>
+        <span>
+            <a href={props.item.url}>
+                {props.item.title}
+            </a>
+        </span><br />
+        <span>{props.item.author}</span><br />
+        <span>{props.item.num_comments}</span><br />
+        <span>{props.item.points}</span>
+    </li>
+);
+
+const List = (props) => (
     <ul>
-        {list.map((item) => {
-            return (
-                <li key={item.objectID}>
-                    <span>
-                        <a href={item.url}>
-                            {item.title}
-                        </a>
-                    </span><br />
-                    <span>{item.author}</span><br />
-                    <span>{item.num_comments}</span><br />
-                    <span>{item.points}</span>
-                </li>
-            );
-        })}
+        {props.list.map((item) => (
+            <Item key={item.objectID} item={item} />
+        ))}
     </ul>
 );
 
