@@ -44,7 +44,7 @@ const App = () => {
     );
 
     return (
-        <div>
+        <>
             <h1>My Hacker Stories</h1>
 
             <Search term={searchTerm} onSearch={handleSearch} />
@@ -53,19 +53,19 @@ const App = () => {
 
             <List list={searchedStories} />
 
-        </div>
+        </>
     );
 }
 
 const Search = ({ term, onSearch }) => (
-    <div>
+    <>
         <label htmlFor="search" placeholder="Search">Search: </label>
         <input id="search" type="text" onChange={onSearch} value={term} />
 
         <p>
             Search for: <strong>{term}</strong>
         </p>
-    </div>
+    </>
 );
 
 const List = ({ list }) => (
