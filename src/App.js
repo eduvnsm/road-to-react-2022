@@ -23,7 +23,7 @@ const initialStories = [
     },
     {
         title: 'Redux',
-        url: 'https://redus.js.org/',
+        url: 'https://redux.js.org/',
         author: 'Dan Abramov, Adrew Clark',
         num_comments: 2,
         points: 5,
@@ -44,11 +44,20 @@ const App = () => {
     const [searchTerm, setSearchTerm] = useStorageState('search', 'React');
 
     const [stories, setStories] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [isError, setIsError] = React.useState(false);
+
     React.useEffect(() => {
-        getAsyncStories().then(result => {
-            setStories(result.data.stories);
-        });
+        setIsLoading(true);
+
+        getAsyncStories()
+            .then(result => {
+                setStories(result.data.stories);
+                setIsLoading(false);
+            })
+            .catch(() => setIsError(true));
     }, []);
+
 
     const handleRemoveStory = (item) => {
         const newStories = stories.filter(
@@ -81,7 +90,16 @@ const App = () => {
 
             <hr />
 
-            <List list={searchedStories} onRemoveItem={handleRemoveStory} />
+            {isError && <p>Oops, it's my bad...</p>}
+
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <List
+                    list={searchedStories}
+                    onRemoveItem={handleRemoveStory}
+                />
+            )}
 
         </div>
     );
@@ -121,17 +139,6 @@ const InputWithLabel = ({
         </>
     );
 }
-
-const Search = ({ term, onSearch }) => (
-    <>
-        <label htmlFor="search" placeholder="Search">Search: </label>
-        <input id="search" type="text" onChange={onSearch} value={term} />
-
-        <p>
-            Search for: <strong>{term}</strong>
-        </p>
-    </>
-);
 
 const List = ({ list, onRemoveItem }) => (
     <ul>
