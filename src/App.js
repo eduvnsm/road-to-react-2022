@@ -1,6 +1,8 @@
 import * as React from 'react';
 import axios from 'axios';
 
+import './App.css';
+
 const useStorageState = (key, initialState) => {
     const [value, setValue] = React.useState(
         localStorage.getItem(key) || initialState
@@ -99,21 +101,15 @@ const App = () => {
         });
     };
 
-    const handleSearch = (e) => {
-        setSearchTerm(e.target.value);
-    }
-
     return (
-        <div>
-            <h1>My Hacker Stories</h1>
+        <div className="container">
+            <h1 className="headline-primary">My Hacker Stories</h1>
 
             <SearchForm
                 searchTerm={searchTerm}
                 onSearchInput={handleSearchInput}
                 onSearchSubmit={handleSearchSubmit}
             />
-
-            <hr />
 
             {stories.isError && <p>Oops, it's my bad...</p>}
 
@@ -132,7 +128,7 @@ const SearchForm = ({
     onSearchInput,
     onSearchSubmit
 }) => (
-    <form onSubmit={onSearchSubmit}>
+    <form onSubmit={onSearchSubmit} className="search-form">
         <InputWithLabel
             id="search"
             value={searchTerm}
@@ -142,7 +138,11 @@ const SearchForm = ({
             <strong>Search:</strong>
         </InputWithLabel>
 
-        <button type="submit" disabled={!searchTerm}>
+        <button
+            type="submit"
+            disabled={!searchTerm}
+            className="button button_large"
+        >
             Submit
         </button>
     </form>
@@ -168,7 +168,9 @@ const InputWithLabel = ({
 
     return (
         <>
-            <label htmlFor={id}>{children}</label>
+            <label htmlFor={id} className="label">
+                {children}
+            </label>
             &nbsp;
             {/* B */}
             <input
@@ -178,6 +180,7 @@ const InputWithLabel = ({
                 value={value}
                 autoFocus={isFocused}
                 onChange={onInputChange}
+                className="input"
             />
         </>
     );
@@ -198,17 +201,21 @@ const List = ({ list, onRemoveItem }) => (
 
 const Item = ({ item, onRemoveItem }) => {
     return (
-        <li>
-            <span>
-                <a href={item.url} target="_blank">
+        <li className="item">
+            <span style={{ width: "40px" }}>
+                <a href={item.url} target="_blank" rel="noreferrer">
                     {item.title}
                 </a>
-            </span><br />
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <span>{item.points}</span>
+            </span>
+            <span style={{ width: "30%" }}>{item.author}</span>
+            <span style={{ width: "10%" }}>{item.num_comments}</span>
+            <span style={{ width: "10%" }}>{item.points}</span>
             <span>
-                <button type="button" onClick={() => onRemoveItem(item)}>
+                <button
+                    type="button"
+                    onClick={() => onRemoveItem(item)}
+                    className="button button_small"
+                >
                     Dismiss
                 </button>
             </span>
