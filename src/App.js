@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import styles from './App.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const StyledContainer = styled.div`
     height: 100vw;
@@ -271,7 +273,7 @@ const Item = ({ item, onRemoveItem }) => (
                 type="button"
                 onClick={() => onRemoveItem(item)}
             >
-                Dismiss
+                <FontAwesomeIcon icon={faCheck} />
             </StyledButtonSmall>
            </StyledColumn>
     </StyledItem>
