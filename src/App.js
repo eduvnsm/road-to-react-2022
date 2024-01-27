@@ -79,7 +79,6 @@ const useStorageState = (key, initialState) => {
         if (!isMounted) {
             isMounted.current = true;
         } else {
-            console.log('A');
             localStorage.setItem(key, value);
         }
     }, [value, key]);
@@ -166,12 +165,14 @@ const App = () => {
         handleFetchStories();
     }, [handleFetchStories]);
 
-    const handleRemoveStory = (item) => {
+    const handleRemoveStory = React.useCallback((item) => {
         dispatchStories({
             type: 'REMOVE_STORY',
             payload: item
         });
-    };
+    }, []);
+
+    console.log('B:App');
 
     return (
         <StyledContainer>
@@ -254,16 +255,19 @@ const InputWithLabel = ({
     );
 }
 
-const List = ({ list, onRemoveItem }) => (
-    <ul>
-        {list.map((item) => (
-            <Item
-                key={item.objectID}
-                item={item}
-                onRemoveItem={onRemoveItem}
-            />
-        ))}
-    </ul>
+const List = React.memo(
+    ({ list, onRemoveItem }) =>
+        console.log('B:List') || (
+        <ul>
+            {list.map((item) => (
+                <Item
+                    key={item.objectID}
+                    item={item}
+                    onRemoveItem={onRemoveItem}
+                />
+            ))}
+        </ul>
+    )
 );
 
 
