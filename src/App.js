@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import styles from './App.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const StyledContainer = styled.div`
     height: 100vw;
@@ -290,7 +290,7 @@ const Item = ({ item, onRemoveItem }) => (
                 type="button"
                 onClick={() => onRemoveItem(item)}
             >
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon icon={faXmark} />
             </StyledButtonSmall>
            </StyledColumn>
     </StyledItem>
